@@ -480,6 +480,8 @@ MonoBehaviour:
   rb2d: {fileID: 952733937}
   maxInitialAngle: 0.67
   moveSpeed: 5
+  rotationDuration: 1
+  rotationCount: 3
   maxStartY: 4
 --- !u!4 &980300828 stripped
 Transform:

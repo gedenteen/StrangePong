@@ -1,18 +1,20 @@
 //using System;
 using System.Collections;
 using UnityEngine;
+using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public class Ball : MonoBehaviour
 {
+    // Public fields
     public Rigidbody2D rb2d;
     public float maxInitialAngle = 0.67f;
     public float moveSpeed = 1f;
-
-    public float rotationDuration = 1f; // Duration in seconds
-    public int rotationCount = 3; // Number of rotations
-
-    private float startX = 0f;
+    public float rotationDuration = 0.3f; // Duration in seconds
+    public int rotationCount = 5; // Number of rotations
     public float maxStartY = 4f;
+
+    // Private fields
+    private float startX = 0f;
 
     private void Start()
     {
@@ -36,22 +38,12 @@ public class Ball : MonoBehaviour
         Vector2 pos = new Vector2(startX, posY);
         transform.position = pos;
 
-        /*float elapsedTime = 0f;
-        Quaternion startRotation = transform.rotation;
-        Quaternion targetRotation = Quaternion.Euler(0f, 0f, 180f); // Replace with desired final rotation
-
-        while (elapsedTime < timeForRotation)
-        {
-            transform.rotation = Quaternion.Lerp(startRotation, targetRotation, elapsedTime / timeForRotation);
-            elapsedTime += Time.deltaTime;
-            yield return null;
-        }*/
+        // rotation
         for (int i = 0; i < rotationCount; i++)
         {
             float elapsedTime = 0f;
             Quaternion startRotation = transform.rotation;
-            Debug.Log("transform.rotation=" + transform.rotation);
-            Quaternion targetRotation = Quaternion.Euler(0f, 0f, (i%2+1) * 180f);
+            Quaternion targetRotation = Quaternion.Euler(0f, 0f, 90f);
 
             while (elapsedTime < rotationDuration)
             {
@@ -59,20 +51,11 @@ public class Ball : MonoBehaviour
                 elapsedTime += Time.deltaTime;
                 yield return null;
             }
+
+            transform.rotation = new Quaternion();
         }
 
         InitialPush();
-    }
-
-    private void ResetBallPart2()
-    {
-        // direction
-        InitialPush();
-
-        // position
-        float posY = UnityEngine.Random.Range(-maxStartY, maxStartY);
-        Vector2 pos = new Vector2(startX, posY);
-        transform.position = pos;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
