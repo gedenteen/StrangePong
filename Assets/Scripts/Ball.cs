@@ -63,6 +63,7 @@ public class Ball : MonoBehaviour
         ScoreZone scoreZone = collision.GetComponent<ScoreZone>();
         if (scoreZone != null)
         {
+            GameManager.instance.OnScoreZoneReached(scoreZone.id);
             StartCoroutine(ResetBall());
         }
     }
