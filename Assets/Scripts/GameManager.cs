@@ -44,11 +44,24 @@ public class GameManager : MonoBehaviour
         }
 
         UpdateScores();
+        HighlightScore(id);
     }
 
     private void UpdateScores()
     {
         scoreTextLeft.SetScore(scorePlayer1);
         scoreTextRight.SetScore(scorePlayer2);
+    }
+
+    public void HighlightScore(int id)
+    {
+        if (id == 1)
+        {
+            scoreTextLeft.Highlight();
+        }
+        else if (id == 2)
+        {
+            scoreTextRight.Highlight();
+        }
     }
 }

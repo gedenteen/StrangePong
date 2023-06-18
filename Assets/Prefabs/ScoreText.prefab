@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7258894377005036598}
   - component: {fileID: 3458370630303627013}
   - component: {fileID: -3249132849652180674}
+  - component: {fileID: 1429463219484833418}
   m_Layer: 5
   m_Name: ScoreText
   m_TagString: Untagged
@@ -94,8 +95,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 64
-  m_fontSizeBase: 64
+  m_fontSize: 128
+  m_fontSizeBase: 128
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -148,3 +149,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d63f941c674ab642be4b5885c8fce3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &1429463219484833418
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3485460423805768090}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 8c5c6b3a41bfc1541a0cfa96d842783a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

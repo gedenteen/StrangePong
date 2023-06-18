@@ -49,8 +49,6 @@ public class Paddle : MonoBehaviour
                 break;
         }
 
-        Debug.Log("movement = " + movement);
-
         return movement;
     }
 
@@ -58,7 +56,6 @@ public class Paddle : MonoBehaviour
     {
         Vector2 velo = rb2d.velocity;
         velo.y = movement * moveSpeed;
-        Debug.Log("velo=" + velo);
         rb2d.velocity = velo;
     }
 }
