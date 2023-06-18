@@ -5,7 +5,7 @@ using UnityEngine;
 public class Paddle : MonoBehaviour
 {
     private Rigidbody2D rb2d;
-    public float id;
+    public int id;
     public float moveSpeed = 2f;
 
     private void Awake()
