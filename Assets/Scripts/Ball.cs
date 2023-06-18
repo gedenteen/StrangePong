@@ -12,7 +12,7 @@ public class Ball : MonoBehaviour
     public float rotationDuration = 0.3f; // Duration in seconds
     public int rotationCount = 5; // Number of rotations
     public float maxStartY = 4f;
-    public float speedMultiplayer = 1.1f;
+    public float speedMultiplier = 1.1f;
 
     // Private fields
     private float startX = 0f;
@@ -76,7 +76,7 @@ public class Ball : MonoBehaviour
         Paddle paddle = collision.collider.GetComponent<Paddle>();
         if (paddle != null)
         {
-            rb2d.velocity *= speedMultiplayer;
+            rb2d.velocity *= speedMultiplier;
         }
     }
 }

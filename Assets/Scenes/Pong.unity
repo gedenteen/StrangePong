@@ -645,7 +645,7 @@ Rigidbody2D:
   m_Material: {fileID: 6200000, guid: 655f551ae50199d41acc0df5d062436c, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!61 &952733938
 BoxCollider2D:
@@ -743,6 +743,7 @@ MonoBehaviour:
   rotationDuration: 0.25
   rotationCount: 4
   maxStartY: 4
+  speedMultiplier: 1.1
 --- !u!4 &980300828 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 854071610606368683, guid: 322300c629c776f4da957dd191057780, type: 3}
