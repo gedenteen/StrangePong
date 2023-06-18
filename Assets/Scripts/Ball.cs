@@ -12,6 +12,7 @@ public class Ball : MonoBehaviour
     public float rotationDuration = 0.3f; // Duration in seconds
     public int rotationCount = 5; // Number of rotations
     public float maxStartY = 4f;
+    public float speedMultiplayer = 1.1f;
 
     // Private fields
     private float startX = 0f;
@@ -55,9 +56,11 @@ public class Ball : MonoBehaviour
             transform.rotation = new Quaternion();
         }
 
+        // push
         InitialPush();
     }
 
+    // Method for collisons with ScoreZone
     private void OnTriggerEnter2D(Collider2D collision)
     {
         ScoreZone scoreZone = collision.GetComponent<ScoreZone>();
@@ -65,6 +68,15 @@ public class Ball : MonoBehaviour
         {
             GameManager.instance.OnScoreZoneReached(scoreZone.id);
             StartCoroutine(ResetBall());
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        Paddle paddle = collision.collider.GetComponent<Paddle>();
+        if (paddle != null)
+        {
+            rb2d.velocity *= speedMultiplayer;
         }
     }
 }
