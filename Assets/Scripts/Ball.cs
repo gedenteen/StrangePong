@@ -5,22 +5,24 @@ using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public class Ball : MonoBehaviour
 {
-    // Public fields
+    /// Public fields
     public Rigidbody2D rb2d;
     public float maxInitialAngle = 0.67f;
     public float moveSpeed = 1f;
-    public float rotationDuration = 0.3f; // Duration in seconds
-    public int rotationCount = 5; // Number of rotations
+    public float rotationDuration = 0.3f; /// Duration in seconds
+    public int rotationCount = 5; /// Number of rotations
     public float maxStartY = 4f;
     public float speedMultiplier = 1.1f;
 
-    // Private fields
+    /// Private fields
     private float startX = 0f;
 
     private void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
         InitialPush();
+
+        GameManager.instance.onReset += ResetBall; /// subscribe to event
     }
 
     private void InitialPush()
@@ -30,16 +32,16 @@ public class Ball : MonoBehaviour
         rb2d.velocity = dir * moveSpeed;
     }
 
-    IEnumerator ResetBall()
+    IEnumerator ResetBallCoroutine()
     {
         rb2d.velocity = Vector2.zero;
 
-        // position
+        /// position
         float posY = UnityEngine.Random.Range(-maxStartY, maxStartY);
         Vector2 pos = new Vector2(startX, posY);
         transform.position = pos;
 
-        // rotation
+        /// rotation
         for (int i = 0; i < rotationCount; i++)
         {
             float elapsedTime = 0f;
@@ -56,18 +58,23 @@ public class Ball : MonoBehaviour
             transform.rotation = new Quaternion();
         }
 
-        // push
+        /// push
         InitialPush();
     }
 
-    // Method for collisons with ScoreZone
+    public void ResetBall()
+    {
+        StartCoroutine(ResetBallCoroutine());
+    }
+
+    /// Method for collisons with ScoreZone
     private void OnTriggerEnter2D(Collider2D collision)
     {
         ScoreZone scoreZone = collision.GetComponent<ScoreZone>();
         if (scoreZone != null)
         {
             GameManager.instance.OnScoreZoneReached(scoreZone.id);
-            StartCoroutine(ResetBall());
+            //StartCoroutine(ResetBallCoroutine());
         }
     }
 

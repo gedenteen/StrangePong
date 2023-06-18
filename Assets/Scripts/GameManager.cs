@@ -1,11 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
     // Public Fields
     public static GameManager instance;
+    public Action onReset;
 
     // Links to be set in the Inspector
     public int scorePlayer1, scorePlayer2;
@@ -28,6 +28,8 @@ public class GameManager : MonoBehaviour
 
     public void OnScoreZoneReached(int id)
     {
+        onReset?.Invoke();
+
         if (id == 1)
         {
             scorePlayer1--;
