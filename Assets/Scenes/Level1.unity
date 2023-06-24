@@ -795,6 +795,7 @@ MonoBehaviour:
   scorePlayer2: 3
   scoreTextLeft: {fileID: 1899221583}
   scoreTextRight: {fileID: 329416401}
+  winText: {fileID: 0}
 --- !u!4 &1025946259
 Transform:
   m_ObjectHideFlags: 0

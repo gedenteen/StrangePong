@@ -25,6 +25,11 @@ public class Ball : MonoBehaviour
         GameManager.instance.onReset += ResetBall; /// subscribe to event
     }
 
+    private void OnDestroy()
+    {
+        GameManager.instance.onReset -= ResetBall;
+    }
+
     private void InitialPush()
     {
         Vector2 dir = UnityEngine.Random.value < 0.5f ? Vector2.left : Vector2.right;

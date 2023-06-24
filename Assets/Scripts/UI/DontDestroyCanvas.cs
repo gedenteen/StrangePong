@@ -14,9 +14,4 @@ public class DontDestroyCanvas : MonoBehaviour
     {
         gameObject.SetActive(false);
     }
-
-    public void Singleplayer()
-    {
-        SceneManager.LoadScene("Level1");
-    }
 }

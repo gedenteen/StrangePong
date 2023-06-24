@@ -1,4 +1,5 @@
 using System;
+using TMPro;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -10,6 +11,7 @@ public class GameManager : MonoBehaviour
     // Links to be set in the Inspector
     public int scorePlayer1, scorePlayer2;
     public ScoreText scoreTextLeft, scoreTextRight;
+    public TextMeshProUGUI winText;
 
     private void Awake()
     {
@@ -28,8 +30,6 @@ public class GameManager : MonoBehaviour
 
     public void OnScoreZoneReached(int id)
     {
-        onReset?.Invoke();
-
         if (id == 1)
         {
             scorePlayer1--;
@@ -51,6 +51,26 @@ public class GameManager : MonoBehaviour
     {
         scoreTextLeft.SetScore(scorePlayer1);
         scoreTextRight.SetScore(scorePlayer2);
+
+        if (scorePlayer1 == 0)
+        {
+            OnGameEnds(1);
+        }
+        else if (scorePlayer2 == 0)
+        {
+            OnGameEnds(2);
+        }
+        else
+        {
+            onReset?.Invoke(); /// reset ball
+        }
+    }
+
+    private void OnGameEnds(int winnerId)
+    {
+        Debug.Log($"OnGameEnds: winner {winnerId}");
+        MainMenu.instance.ChangeTextOfMainLabel($"Player {winnerId} wins!");
+        MainMenu.instance.gameObject.SetActive(true);
     }
 
     public void HighlightScore(int id)
