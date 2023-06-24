@@ -6,7 +6,8 @@ using static UnityEngine.RuleTile.TilingRuleOutput;
 public class Ball : MonoBehaviour
 {
     /// Public fields
-    public Rigidbody2D rb2d;
+    [HideInInspector] public Rigidbody2D rb2d;
+    [HideInInspector] public BallAudio ballAudio;
     public float maxInitialAngle = 0.67f;
     public float moveSpeed = 1f;
     public float rotationDuration = 0.3f; /// Duration in seconds
@@ -19,7 +20,8 @@ public class Ball : MonoBehaviour
 
     private void Start()
     {
-        rb2d = GetComponent<Rigidbody2D>();
+        rb2d = GetComponentInChildren<Rigidbody2D>();
+
         InitialPush();
 
         GameManager.instance.onReset += ResetBall; /// subscribe to event
@@ -39,6 +41,10 @@ public class Ball : MonoBehaviour
 
     IEnumerator ResetBallCoroutine()
     {
+        /// play sound
+        ballAudio.PlayResetBallSound();
+
+        /// stop the ball
         rb2d.velocity = Vector2.zero;
 
         /// position
@@ -88,7 +94,14 @@ public class Ball : MonoBehaviour
         Paddle paddle = collision.collider.GetComponent<Paddle>();
         if (paddle != null)
         {
+            ballAudio.PlayPaddleSound();
             rb2d.velocity *= speedMultiplier;
+        }
+
+        Wall wall = collision.collider.GetComponent<Wall>();
+        if (wall != null)
+        {
+            ballAudio.PlayWallSound();
         }
     }
 }

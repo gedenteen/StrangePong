@@ -54,21 +54,25 @@ public class GameManager : MonoBehaviour
 
         if (scorePlayer1 == 0)
         {
-            OnGameEnds(1);
+            OnGameEnds(2);
+            AudioManager.instance.PlayLooseSound();
         }
         else if (scorePlayer2 == 0)
         {
-            OnGameEnds(2);
+            OnGameEnds(1);
+            AudioManager.instance.PlayWinSound();
         }
         else
         {
             onReset?.Invoke(); /// reset ball
+            //AudioManager.instance.PlayScoreSound(); ///delete?
         }
     }
 
     private void OnGameEnds(int winnerId)
     {
         Debug.Log($"OnGameEnds: winner {winnerId}");
+
         MainMenu.instance.ChangeTextOfMainLabel($"Player {winnerId} wins!");
         MainMenu.instance.gameObject.SetActive(true);
     }

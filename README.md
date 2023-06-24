@@ -5,9 +5,10 @@ https://www.youtube.com/watch?v=DnBTmYXThOY
 ## What i want to do
 
 Level 1 - default enemy with direction changers
-Level 2 - default enemy with direction changers and music changers
+Level 2 - default enemy with direction changers and music speed up x1.1
 Level 3 - strange level. For example in a circle. Or with tunnels. Or reverted walls
 Level x - level where player and enemy moving 2 paddles
+Level x - squares with +1 hp
 Level 4 - enemy is a cheater that can teleports with small delay. But he is slow. There should be boosters that creates a second ball
 Level 5 - Final boss. Enemy is a BASE that shooting balls from a few guns. Player should hit the balls to damage the base
 
