@@ -6,11 +6,14 @@ public class AudioManager : MonoBehaviour
 {
     public static AudioManager instance;
 
+    [Header("Refs to Audio Sources")]
     public AudioSource audioSourceSounds;
+    public AudioSource audioSourceMusic;
 
-    /*public AudioClip resetBallSound;
-    public AudioClip wallSound;
-    public AudioClip paddleSound;*/
+    [Header("Refs to music")]
+    public AudioClip mainMenuMusic;
+
+    [Header("Refs to sounds")]
     public AudioClip scoreSound;
     public AudioClip winSound;
     public AudioClip looseSound;
@@ -19,6 +22,11 @@ public class AudioManager : MonoBehaviour
     {
         instance = this;
         DontDestroyOnLoad(gameObject);
+    }
+
+    private void OnLevelWasLoaded(int level)
+    {
+        audioSourceMusic.Stop();
     }
 
     public void PlayScoreSound()

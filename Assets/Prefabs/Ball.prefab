@@ -203,7 +203,7 @@ MonoBehaviour:
   audioSource: {fileID: 2320863122168984169}
   resetBallSound: {fileID: 8300000, guid: 11486de42bbda7044a8edfdd71d8f336, type: 3}
   wallSound: {fileID: 8300000, guid: ab3f64c73538f8149aa5c8eff37e033e, type: 3}
-  paddleSound: {fileID: 8300000, guid: fb08f702d0e1ca74da00115d1cc452ee, type: 3}
+  paddleSound: {fileID: 8300000, guid: f1020c71193bb8f4db021bd80b871ef1, type: 3}
 --- !u!82 &2320863122168984169
 AudioSource:
   m_ObjectHideFlags: 0
