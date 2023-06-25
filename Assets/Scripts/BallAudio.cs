@@ -10,6 +10,17 @@ public class BallAudio : MonoBehaviour
     public AudioClip wallSound;
     public AudioClip paddleSound;
 
+    private void Awake()
+    {
+        audioSource.volume = AudioManager.instance.audioSourceSounds.volume;
+        AudioManager.instance.onSoundsVolumeChange += ChangeVolumeSounds;
+    }
+
+    private void OnDestroy()
+    {
+        AudioManager.instance.onSoundsVolumeChange -= ChangeVolumeSounds;
+    }
+
     public void PlayResetBallSound()
     {
         audioSource.PlayOneShot(resetBallSound);
@@ -21,5 +32,10 @@ public class BallAudio : MonoBehaviour
     public void PlayPaddleSound()
     {
         audioSource.PlayOneShot(paddleSound);
+    }
+
+    public void ChangeVolumeSounds(float volume)
+    {
+        audioSource.volume = volume;
     }
 }
