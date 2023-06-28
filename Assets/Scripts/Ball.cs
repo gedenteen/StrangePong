@@ -8,6 +8,7 @@ public class Ball : MonoBehaviour
     /// Public fields
     [HideInInspector] public Rigidbody2D rb2d;
     [HideInInspector] public BallAudio ballAudio;
+    [HideInInspector] public ParticleSystem collisionParticle;
     public float maxInitialAngle = 0.67f;
     public float moveSpeed = 1f;
     public float rotationDuration = 0.3f; /// Duration in seconds
@@ -21,6 +22,7 @@ public class Ball : MonoBehaviour
     private void Start()
     {
         rb2d = GetComponentInChildren<Rigidbody2D>();
+        collisionParticle = GetComponentInChildren<ParticleSystem>();
 
         InitialPush();
 
@@ -37,6 +39,8 @@ public class Ball : MonoBehaviour
         Vector2 dir = UnityEngine.Random.value < 0.5f ? Vector2.left : Vector2.right;
         dir.y = UnityEngine.Random.Range(-maxInitialAngle, maxInitialAngle);
         rb2d.velocity = dir * moveSpeed;
+
+        EmitParticle(16);
     }
 
     IEnumerator ResetBallCoroutine()
@@ -96,12 +100,19 @@ public class Ball : MonoBehaviour
         {
             ballAudio.PlayPaddleSound();
             rb2d.velocity *= speedMultiplier;
+            EmitParticle(4);
         }
 
         Wall wall = collision.collider.GetComponent<Wall>();
         if (wall != null)
         {
             ballAudio.PlayWallSound();
+            EmitParticle(4);
         }
+    }
+
+    private void EmitParticle(int amount)
+    {
+        collisionParticle.Emit(amount);
     }
 }
