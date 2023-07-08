@@ -24,3 +24,4 @@ x. "Exit"
 
 Import font with pixel symbols?
 Animation for main menu
+Changing bloom in settings

@@ -15,10 +15,12 @@ public class Paddle : MonoBehaviour
     private int direction = 0; //direction to move
     private float moveSpeedMultiplier = 1f;
     private float timerToDoNothing = 0;
+    private bool thisPlayerIsAi = false; //set it in Awake()
 
     private void Awake()
     {
         rb2d = GetComponent<Rigidbody2D>();
+        thisPlayerIsAi = Settings.instance.IsThisPlayerAi(id);
     }
 
     private void Start()
@@ -46,11 +48,11 @@ public class Paddle : MonoBehaviour
                 aiDeadZoneY = 1f;
                 break;
             default:
-                Debug.LogError("Unexpcted difficult level");
+                //Debug.LogError("Unexpcted difficult level");
                 break;
         }
 
-        if (id == 2 && Settings.instance.IsPlayerVsAi())
+        if (thisPlayerIsAi)
         {
             MoveAi();
         }
@@ -100,7 +102,7 @@ public class Paddle : MonoBehaviour
         Vector2 ballPos = GameManager.instance.ball.transform.position;
         Vector2 ballVelocity = GameManager.instance.ball.rb2d.velocity;
 
-        if (ballVelocity.x < 0)
+        if ((id == 1 && ballVelocity.x > 0) || (id == 2 && ballVelocity.x < 0))
         {
             // Hold position
             direction = 0;

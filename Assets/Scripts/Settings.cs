@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Settings : MonoBehaviour
 {
@@ -12,7 +13,8 @@ public class Settings : MonoBehaviour
     public enum PlayMode
     {
         PlayerVsPlayer,
-        PlayerVsAi
+        PlayerVsAi,
+        AiVsAi
     }
 
     private void Awake()
@@ -26,6 +28,9 @@ public class Settings : MonoBehaviour
             instance = this;
             DontDestroyOnLoad(gameObject);
         }
+
+        SceneManager.LoadScene("AiVsAi");
+        SetPlayMode(PlayMode.AiVsAi);
     }
 
     public void SetPlayModePlayerVsPlayer()
@@ -43,8 +48,30 @@ public class Settings : MonoBehaviour
         this.playMode = playMode;
     }
 
-    public bool IsPlayerVsAi()
+    /*public bool IsPlayer2Ai()
     {
-        return playMode == PlayMode.PlayerVsAi;
+        return playMode == PlayMode.PlayerVsAi || playMode == PlayMode.AiVsAi;
+    }
+
+    public bool IsPlayer1Ai()
+    {
+        return playMode == PlayMode.AiVsAi;
+    }*/
+
+    public bool IsThisPlayerAi(int playerId)
+    {
+        if (playerId == 1)
+        {
+            return playMode == PlayMode.AiVsAi;
+        }
+        else if (playerId == 2)
+        {
+            return playMode == PlayMode.PlayerVsAi || playMode == PlayMode.AiVsAi;
+        }
+        else
+        {
+            Debug.LogError($"Unexpected player id {playerId}");
+            return false;
+        }
     }
 }

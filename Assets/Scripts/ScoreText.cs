@@ -16,11 +16,13 @@ public class ScoreText : MonoBehaviour
 
     public void SetScore(int value)
     {
-        text.text = value.ToString();
+        if (text != null)
+            text.text = value.ToString();
     }
 
     public void Highlight()
     {
-        animator.SetTrigger("Highlight");
+        if (animator != null)
+            animator.SetTrigger("Highlight");
     }
 }

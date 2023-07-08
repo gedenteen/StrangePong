@@ -12,6 +12,9 @@ public class DontDestroyCanvas : MonoBehaviour
 
     private void OnLevelWasLoaded(int level)
     {
-        gameObject.SetActive(false);
+        if (level > 1)
+        {
+            gameObject.SetActive(false);
+        }
     }
 }

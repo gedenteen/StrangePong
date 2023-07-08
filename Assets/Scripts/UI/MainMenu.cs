@@ -24,7 +24,10 @@ public class MainMenu : MonoBehaviour
 
     private void OnLevelWasLoaded(int level)
     {
-        ChangeTextOfMainLabel("Pause");
+        if (level > 1)
+        {
+            ChangeTextOfMainLabel("Pause");
+        }
     }
 
     public void ChangeTextOfMainLabel(string text)

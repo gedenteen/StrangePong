@@ -29,7 +29,10 @@ public class AudioManager : MonoBehaviour
 
     private void OnLevelWasLoaded(int level)
     {
-        audioSourceMusic.Stop();
+        if (level > 1)
+        {
+            audioSourceMusic.Stop();
+        }
     }
 
     #region PlaySounds

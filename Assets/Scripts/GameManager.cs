@@ -1,6 +1,8 @@
 using System;
 using TMPro;
+using UnityEditor.SearchService;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -78,7 +80,15 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log($"OnGameEnds: winner {winnerId}");
 
-        MainMenu.instance.ChangeTextOfMainLabel($"Player {winnerId} wins!");
+        if (SceneManager.GetActiveScene().name == "AiVsAi")
+        {
+            MainMenu.instance.ChangeTextOfMainLabel("Wow, the computers are done playing");
+        }
+        else
+        {
+            MainMenu.instance.ChangeTextOfMainLabel($"Player {winnerId} wins!");
+        }
+
         MainMenu.instance.gameObject.SetActive(true);
     }
 
