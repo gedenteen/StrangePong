@@ -8,10 +8,15 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
     public Action onReset;
 
-    // Links to be set in the Inspector
-    public int scorePlayer1, scorePlayer2;
-    public ScoreText scoreTextLeft, scoreTextRight;
-    public TextMeshProUGUI winText;
+    [Header("Changable fields")]
+    public int scorePlayer1;
+    public int scorePlayer2;
+
+    [Header("References to objects, set them via Inspector")]
+    public ScoreText scoreTextLeft;
+    public ScoreText scoreTextRight;
+    //public TextMeshProUGUI winText;
+    public Ball ball;
 
     private void Awake()
     {
