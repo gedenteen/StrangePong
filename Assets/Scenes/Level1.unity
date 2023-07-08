@@ -152,7 +152,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1389173836446948573, guid: 5d4ffc1cb4e82f34583e4cdcd4c9bbb6, type: 3}
       propertyPath: aiDeadZoneY
-      value: 1
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 2139467796112415594, guid: 5d4ffc1cb4e82f34583e4cdcd4c9bbb6, type: 3}
       propertyPath: m_Constraints

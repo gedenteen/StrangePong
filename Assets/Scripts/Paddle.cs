@@ -7,8 +7,8 @@ public class Paddle : MonoBehaviour
     private Rigidbody2D rb2d;
     public int id;
     public float moveSpeed = 2f;
-    public float aiDeadZoneY = 1f;
-    public float aiDeadZoneX = 1.2f;
+    public float aiDeadZoneY = 0.8f;
+    //public float aiDeadZoneX = 1.2f;
     public float timeForDoNothing = 0.1f;
 
     private Vector3 startPosition;
@@ -38,15 +38,12 @@ public class Paddle : MonoBehaviour
         {
             case 0:
                 aiDeadZoneY = 2.2f;
-                //aiDeadZoneX = 0f;
                 break;
             case 1:
                 aiDeadZoneY = 1.6f;
-                //aiDeadZoneX = 0.2f;
                 break;
             case 2:
                 aiDeadZoneY = 1f;
-                //aiDeadZoneX = 0.6f;
                 break;
             default:
                 Debug.LogError("Unexpcted difficult level");
@@ -91,6 +88,8 @@ public class Paddle : MonoBehaviour
 
     public void MoveAi()
     {
+        //transform.position = new Vector2(startPosition.x, ballPos.y); // Unbeatable AI code
+
         if (timerToDoNothing > 0)
         {
             timerToDoNothing = Mathf.Clamp(timerToDoNothing - Time.deltaTime, 0f, 2f);
@@ -101,28 +100,23 @@ public class Paddle : MonoBehaviour
         Vector2 ballPos = GameManager.instance.ball.transform.position;
         Vector2 ballVelocity = GameManager.instance.ball.rb2d.velocity;
 
-        //transform.position = new Vector2(startPosition.x, ballPos.y); // Unbeatable AI code
-
-        // Calculate difference between Paddle pos and Ball pos. Change direction, if difference > aiDeadZone
-
-        float xDifference = ballPos.x - transform.position.x;
-        if (Mathf.Abs(xDifference) < aiDeadZoneX)
+        if (ballVelocity.x < 0)
         {
-            //
+            // Hold position
             direction = 0;
             Move(direction);
-            //return;
+            return;
         }
 
-        //
-        float timeToReach = xDifference / ballVelocity.x;
-        float yDifference = ballPos.y + ballVelocity.y * timeToReach - transform.position.y;
+        float xDifference = ballPos.x - transform.position.x; //x-distance between ball and this paddle
+        float timeToReach = xDifference / ballVelocity.x; // time ro reach this paddle
+        float yDifference = ballPos.y + ballVelocity.y * timeToReach - transform.position.y; //y-distance taking into account the movement of the ball
         if (Mathf.Abs(yDifference) > aiDeadZoneY)
         {
             direction = yDifference > 0 ? 1 : -1;
             timerToDoNothing = timeForDoNothing;
         }
-        Move(direction); //delete??
+        Move(direction);
     }
 
     private void Move(float movement)
